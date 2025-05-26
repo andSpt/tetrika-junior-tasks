@@ -1,11 +1,9 @@
 from functools import wraps
-from typing import Callable, TypeVar, Any
+from typing import Callable, Any
 import unittest
 
 
-F = TypeVar('F', bound=Callable[..., Any])
-
-def strict(func) -> F:
+def strict(func: Callable) -> Callable:
     annotations: dict[str, type] = dict(func.__annotations__)
     annotations.pop('return', None)
 
