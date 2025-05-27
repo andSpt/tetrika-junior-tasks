@@ -1,11 +1,9 @@
-from typing import Optional
+from bs4 import BeautifulSoup, Tag, ResultSet
 import csv
 from pathlib import Path
 import requests
 from requests import Response
-from bs4 import BeautifulSoup, Tag, ResultSet
 from urllib.parse import urljoin
-
 
 
 BASE_URL: str = "https://ru.wikipedia.org/wiki/Категория:Животные_по_алфавиту"
@@ -47,7 +45,6 @@ def main() -> None:
                 if 'А' <= letter <= 'Я':
                     animals_count[letter] = animals_count.get(letter, 0) + 1
 
-
         page_num += 1
 
         next_link: Tag | None = soup.find('a', string='Следующая страница')
@@ -56,10 +53,11 @@ def main() -> None:
             print("Переходим к следующей странице...\n")
         else:
             print("Следующая страница не найдена, завершаем парсинг.")
-
             next_page = None
+
     current_dir: Path = Path(__file__).parent
     print("Записываем результаты в beasts.csv...")
+    
     with open(str(current_dir / "beasts.csv"), "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
         for letter in sorted(animals_count.keys()):

@@ -51,10 +51,8 @@ def appearance(intervals: dict[str, list[int]]) -> int:
             i += 1
         else:
             j += 1
-
+    
     return total
-
-
 
 
 tests = [
@@ -74,6 +72,7 @@ tests = [
     'answer': 3565
     },
 ]
+
 
 if __name__ == '__main__':
    for i, test in enumerate(tests):
